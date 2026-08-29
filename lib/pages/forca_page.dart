@@ -71,7 +71,10 @@ class _ForcaPageState extends State<ForcaPage> {
                   spacing: 0,
                   runSpacing: 0,
                   children: palavraSorteada.split('').map((letra) {
-                    return LetraSorteadaWidget(letra: letra, revelada: true);
+                    return LetraSorteadaWidget(
+                      letra: letra,
+                      revelada: tentativas.contains(letra),
+                    );
                   }).toList(),
                 ),
               ],

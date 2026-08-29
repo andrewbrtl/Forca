@@ -10,6 +10,17 @@ class Teclado extends StatefulWidget {
 }
 
 class _TecladoState extends State<Teclado> {
+  Widget _buildBotaoFundo(bool usada) {
+    return Image.asset(
+      'assets/letras/botao.png',
+      width: 52,
+      height: 52,
+      fit: BoxFit.contain,
+      color: usada ? Colors.black.withValues(alpha: 0.5) : null,
+      colorBlendMode: BlendMode.dstATop,
+    );
+  }
+
   final List<String> letras = [
     "A",
     "B",
@@ -64,16 +75,24 @@ class _TecladoState extends State<Teclado> {
           SizedBox(
             width: 52,
             height: 52,
-            child: ElevatedButton(
-              onPressed: usadas.contains(letra)
-                  ? null
-                  : () => apertarLetra(letra),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                backgroundColor: Colors.white,
-                disabledBackgroundColor: Colors.grey,
+            child: InkWell(
+              onTap: usadas.contains(letra) ? null : () => apertarLetra(letra),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  _buildBotaoFundo(usadas.contains(letra)),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Opacity(
+                      opacity: usadas.contains(letra) ? 0.3 : 1.0,
+                      child: Image.asset(
+                        caminhoImagem(letra),
+                        filterQuality: FilterQuality.medium,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              child: Image.asset(caminhoImagem(letra), width: 52, height: 52),
             ),
           ),
       ],
