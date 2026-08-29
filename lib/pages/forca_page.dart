@@ -49,11 +49,11 @@ class _ForcaPageState extends State<ForcaPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        toolbarHeight: 90,
         centerTitle: true,
-        title: Image(
-          image: AssetImage('assets/titulo.png'),
-          fit: BoxFit.fitWidth,
-          height: 56,
+        title: SizedBox(
+          height: 60,
+          child: Image.asset('assets/titulo.png', fit: BoxFit.fitWidth),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
