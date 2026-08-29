@@ -16,6 +16,33 @@ class _ForcaPageState extends State<ForcaPage> {
         title: Text("Forca", style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.grey,
       ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: const Center(
+                child: Text("area de ciima", style: TextStyle(fontSize: 24)),
+              ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            color: Colors.grey[200],
+            child: const Column(
+              children: [
+                Text(
+                  "teclado do jorlan",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 300),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
