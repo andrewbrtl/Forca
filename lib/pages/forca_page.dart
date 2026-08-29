@@ -47,46 +47,55 @@ class _ForcaPageState extends State<ForcaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Forca", style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.grey,
+        title: Image(
+          image: AssetImage('assets/titulo.png'),
+          fit: BoxFit.fitWidth,
+          height: 56,
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Vidas: $vidas',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/fundo.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const SizedBox(height: 40),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 0,
+                    runSpacing: 0,
+                    children: palavraSorteada.split('').map((letra) {
+                      return LetraSorteadaWidget(
+                        letra: letra,
+                        revelada: tentativas.contains(letra),
+                      );
+                    }).toList(),
                   ),
-                ),
-                const SizedBox(height: 40),
-                Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 0,
-                  runSpacing: 0,
-                  children: palavraSorteada.split('').map((letra) {
-                    return LetraSorteadaWidget(
-                      letra: letra,
-                      revelada: tentativas.contains(letra),
-                    );
-                  }).toList(),
-                ),
-              ],
+                  const SizedBox(height: 40),
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            color: Colors.grey[200],
-            child: const Teclado(),
-          ),
-        ],
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              child: const Teclado(),
+            ),
+          ],
+        ),
       ),
     );
   }
