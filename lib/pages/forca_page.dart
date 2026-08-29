@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jogo_da_forca/widgets/teclado.dart';
 
 class ForcaPage extends StatefulWidget {
   const ForcaPage({super.key});
@@ -31,15 +32,7 @@ class _ForcaPageState extends State<ForcaPage> {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             color: Colors.grey[200],
-            child: const Column(
-              children: [
-                Text(
-                  "teclado do jorlan",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 300),
-              ],
-            ),
+            child: const Teclado(),
           ),
         ],
       ),
