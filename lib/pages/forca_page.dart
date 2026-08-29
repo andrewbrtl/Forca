@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:jogo_da_forca/widgets/letra_palavra_widget.dart';
 import 'package:jogo_da_forca/widgets/teclado.dart';
 
 class ForcaPage extends StatefulWidget {
@@ -9,6 +12,38 @@ class ForcaPage extends StatefulWidget {
 }
 
 class _ForcaPageState extends State<ForcaPage> {
+  final List<String> palavras = [
+    'BISTECA',
+    'BERNARDO',
+    'BURDOGA',
+    'KUSTER',
+    'RAGUGNETTI',
+    'FARTURA',
+    'MOTOR',
+    'AVIAO',
+    'DETONADO',
+    'MAGO',
+  ];
+
+  late String palavraSorteada;
+  List<String> tentativas = [];
+  int vidas = 4;
+
+  @override
+  void initState() {
+    super.initState();
+    comecar();
+  }
+
+  void comecar() {
+    setState(() {
+      final random = Random();
+      palavraSorteada = palavras[random.nextInt(palavras.length)];
+      tentativas.clear();
+      vidas = 4;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +55,26 @@ class _ForcaPageState extends State<ForcaPage> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              width: double.infinity,
-              color: Colors.white,
-              child: const Center(
-                child: Text("area de ciima", style: TextStyle(fontSize: 24)),
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Vidas: $vidas',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 0,
+                  runSpacing: 0,
+                  children: palavraSorteada.split('').map((letra) {
+                    return LetraSorteadaWidget(letra: letra, revelada: true);
+                  }).toList(),
+                ),
+              ],
             ),
           ),
           Container(

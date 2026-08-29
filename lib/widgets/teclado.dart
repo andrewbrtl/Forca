@@ -11,9 +11,32 @@ class Teclado extends StatefulWidget {
 
 class _TecladoState extends State<Teclado> {
   final List<String> letras = [
-    "A", "B", "C", "Ç", "D", "E", "F", "G", "H",
-    "I", "J", "K", "L", "M", "N", "O", "P", "Q",
-    "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
   ];
 
   final List<String> usadas = [];
@@ -50,11 +73,7 @@ class _TecladoState extends State<Teclado> {
                 backgroundColor: Colors.white,
                 disabledBackgroundColor: Colors.grey,
               ),
-              child: Image.asset(
-                caminhoImagem(letra),
-                width: 52,
-                height: 52,
-              ),
+              child: Image.asset(caminhoImagem(letra), width: 52, height: 52),
             ),
           ),
       ],
