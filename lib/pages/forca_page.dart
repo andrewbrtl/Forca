@@ -30,11 +30,25 @@ class _ForcaPageState extends State<ForcaPage> {
   List<String> tentativas = [];
   int perdas = 0;
   List<String> historico = [];
+  bool salvouHistorico = false;
+  bool mostrarTelaFinal = true;
 
   @override
   void initState() {
     super.initState();
     comecar();
+  }
+
+  void salvarHistorico() {
+    if (salvouHistorico == false) {
+      if (ganhou) {
+        historico.add('Palavra: $palavraSorteada\nResultado: Vitória');
+      } else if (perdeu) {
+        historico.add('Palavra: $palavraSorteada\nResultado: Derrota');
+      }
+
+      salvouHistorico = true;
+    }
   }
 
   void comecar() {
@@ -43,6 +57,8 @@ class _ForcaPageState extends State<ForcaPage> {
       palavraSorteada = palavras[random.nextInt(palavras.length)];
       tentativas.clear();
       perdas = 0;
+      salvouHistorico = false;
+      mostrarTelaFinal = true;
     });
   }
 
@@ -135,10 +151,14 @@ class _ForcaPageState extends State<ForcaPage> {
                     usadas: tentativas,
                     onLetra: (letra) {
                       if (acabou) return;
+
                       setState(() {
                         tentativas.add(letra);
                         if (!palavraSorteada.contains(letra)) {
                           perdas++;
+                        }
+                        if (acabou) {
+                          salvarHistorico();
                         }
                       });
                     },
@@ -147,7 +167,7 @@ class _ForcaPageState extends State<ForcaPage> {
               ],
             ),
           ),
-          if (acabou)
+          if (acabou && mostrarTelaFinal)
             Container(
               color: Colors.black.withValues(alpha: 0.6),
               width: double.infinity,
@@ -161,9 +181,25 @@ class _ForcaPageState extends State<ForcaPage> {
                     shape: BoxShape.circle,
                   ),
                   padding: const EdgeInsets.all(40),
-                  child: Image.asset(
-                    ganhou ? 'assets/ganhou.png' : 'assets/perdeu.png',
-                    fit: BoxFit.contain,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            mostrarTelaFinal = false;
+                          });
+                        },
+                        icon: const Icon(Icons.close),
+                      ),
+
+                      Expanded(
+                        child: Image.asset(
+                          ganhou ? 'assets/ganhou.png' : 'assets/perdeu.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
