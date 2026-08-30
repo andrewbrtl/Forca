@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:jogo_da_forca/pages/historico_page.dart';
 import 'package:flutter/material.dart';
 import 'package:jogo_da_forca/widgets/letra_palavra_widget.dart';
 import 'package:jogo_da_forca/widgets/teclado.dart';
@@ -28,6 +29,7 @@ class _ForcaPageState extends State<ForcaPage> {
   late String palavraSorteada;
   List<String> tentativas = [];
   int vidas = 4;
+  List<String> historico = [];
 
   @override
   void initState() {
@@ -57,7 +59,32 @@ class _ForcaPageState extends State<ForcaPage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+
+        actions: [
+    IconButton(
+      // icone do historico
+      icon: const Icon(
+        Icons.history,
+        color: Colors.black,
+        size: 32,
       ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return HistoricoPage(
+                historico: historico,
+              );
+            },
+          ),
+        );
+      },
+    ),
+  ],
+),
+
+
       body: Container(
         width: double.infinity,
         height: double.infinity,
