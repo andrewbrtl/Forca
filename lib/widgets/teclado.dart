@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 
-class Teclado extends StatefulWidget {
+class Teclado extends StatelessWidget {
+  final List<String> usadas;
   final void Function(String letra)? onLetra;
 
-  const Teclado({super.key, this.onLetra});
+  const Teclado({super.key, required this.usadas, this.onLetra});
 
-  @override
-  State<Teclado> createState() => _TecladoState();
-}
-
-class _TecladoState extends State<Teclado> {
   Widget _buildBotaoFundo(bool usada) {
-    return Image.asset(
-      'assets/letras/botao.png',
-      width: 52,
-      height: 52,
-      fit: BoxFit.contain,
-      color: usada ? Colors.black.withValues(alpha: 0.5) : null,
-      colorBlendMode: BlendMode.dstATop,
+    return Opacity(
+      opacity: usada ? 0.4 : 1.0,
+      child: Image.asset(
+        'assets/letras/botao.png',
+        width: 52,
+        height: 52,
+        fit: BoxFit.contain,
+        color: usada ? Colors.black.withValues(alpha: 0.5) : null,
+      ),
     );
   }
 
-  final List<String> letras = [
+  static const List<String> letras = [
     "A",
     "B",
     "C",
@@ -50,18 +48,8 @@ class _TecladoState extends State<Teclado> {
     "Z",
   ];
 
-  final List<String> usadas = [];
-
   String caminhoImagem(String letra) {
-    String nomeArquivo = letra.toUpperCase();
-    return 'assets/letras/$nomeArquivo.png';
-  }
-
-  void apertarLetra(String letra) {
-    setState(() {
-      usadas.add(letra);
-    });
-    widget.onLetra?.call(letra);
+    return 'assets/letras/${letra.toUpperCase()}.png';
   }
 
   @override
@@ -76,7 +64,7 @@ class _TecladoState extends State<Teclado> {
             width: 52,
             height: 52,
             child: InkWell(
-              onTap: usadas.contains(letra) ? null : () => apertarLetra(letra),
+              onTap: usadas.contains(letra) ? null : () => onLetra?.call(letra),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -85,10 +73,7 @@ class _TecladoState extends State<Teclado> {
                     padding: const EdgeInsets.all(4),
                     child: Opacity(
                       opacity: usadas.contains(letra) ? 0.3 : 1.0,
-                      child: Image.asset(
-                        caminhoImagem(letra),
-                        filterQuality: FilterQuality.medium,
-                      ),
+                      child: Image.asset(caminhoImagem(letra)),
                     ),
                   ),
                 ],

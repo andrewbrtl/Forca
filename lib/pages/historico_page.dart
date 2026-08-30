@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class HistoricoPage extends StatelessWidget {
   final List<String> historico;
 
-  const HistoricoPage({
-    super.key,
-    required this.historico,
-  });
+  const HistoricoPage({super.key, required this.historico});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +14,7 @@ class HistoricoPage extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Histórico',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -30,7 +24,6 @@ class HistoricoPage extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
 
-        
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/fundo.jpg'),
@@ -43,23 +36,17 @@ class HistoricoPage extends StatelessWidget {
                 child: Text(
                   'Não há partidas no histórico.',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               )
             : ListView.builder(
-                padding: const EdgeInsets.only(
-                  top: 110,
-                  left: 15,
-                  right: 15,
-                ),
+                padding: const EdgeInsets.only(top: 110, left: 15, right: 15),
                 itemCount: historico.length,
                 itemBuilder: (context, index) {
-                  return PartidaHistorico(
-                    texto: historico[index],
-                  );
+                  return PartidaHistorico(texto: historico[index]);
                 },
               ),
       ),
@@ -71,10 +58,7 @@ class HistoricoPage extends StatelessWidget {
 class PartidaHistorico extends StatelessWidget {
   final String texto;
 
-  const PartidaHistorico({
-    super.key,
-    required this.texto,
-  });
+  const PartidaHistorico({super.key, required this.texto});
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +68,12 @@ class PartidaHistorico extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.65),
-        border: Border.all(
-          color: Colors.white,
-          width: 2,
-        ),
+        border: Border.all(color: Colors.white, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
         texto,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-        ),
+        style: const TextStyle(color: Colors.white, fontSize: 18),
       ),
     );
   }

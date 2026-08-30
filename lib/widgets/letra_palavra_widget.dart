@@ -18,7 +18,6 @@ class LetraSorteadaWidget extends StatelessWidget {
       child: Image.asset(
         'assets/letras/$nomeArquivo.png',
         width: 52,
-        filterQuality: FilterQuality.medium,
         fit: BoxFit.contain,
         height: 52,
       ),
