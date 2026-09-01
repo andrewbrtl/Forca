@@ -8,7 +8,9 @@ class Teclado extends StatelessWidget {
 
   Widget _buildBotaoFundo(bool usada) {
     return Opacity(
-      opacity: usada ? 0.4 : 1.0,
+      opacity: usada
+          ? 0.4
+          : 1.0, //Aqui na hora de contruir cada botao ele ja recebe se ele ja foi usado ou nao, a verificacao fica no outro widget
       child: Image.asset(
         'assets/letras/botao.png',
         width: 52,
@@ -59,13 +61,18 @@ class Teclado extends StatelessWidget {
       runSpacing: 6,
       alignment: WrapAlignment.center,
       children: [
-        for (String letra in letras)
+        for (String letra in letras) //Gera todas as letras
           SizedBox(
             width: 52,
             height: 52,
             child: InkWell(
-              onTap: usadas.contains(letra) ? null : () => onLetra?.call(letra),
+              onTap: usadas.contains(letra)
+                  ? null
+                  : () => onLetra?.call(
+                      letra,
+                    ), //chama a funcao callback do forca_poage.
               child: Stack(
+                //Denovo stack pra poder combinas duas imagens a do fundo e a da letra, assim evita ter q ter o dobro de asset.
                 alignment: Alignment.center,
                 children: [
                   _buildBotaoFundo(usadas.contains(letra)),
